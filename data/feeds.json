@@ -1,0 +1,10 @@
+{
+  "websites" : {
+    "YCombinator":  
+    {
+      "url": "https://news.ycombinator.com/rss",
+      "user": "example",
+      "title": "example"
+    }
+  }
+}
