@@ -1,4 +1,4 @@
-# Discord RSS feed channel webhooks
+# RSS feed for Slack/Discord channel webhooks
 
 ## Set up
 For your local instance, run the following script to add the necessary folders
