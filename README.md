@@ -8,7 +8,7 @@ $ chmod +x build.sh
 $ ./build.sh
 ```
 
-For setting up your own RSS feeds to their corresponding webhooks, [we provide a JSON schema](./data/servers.schema.json). Follow the schema and put your own JSON file in [the private folder](./data/private). Make sure to **never** share your webhook urls or data!
+For setting up your own RSS feeds to their corresponding webhooks, [we provide a JSON schema](./data/servers.schema.json). Follow the schema and put your own JSON file in [the private folder](./data/private) (accessible after running `build.sh`). Make sure to **never** share your webhook urls or data!
 
 > Example server configuration file
 
