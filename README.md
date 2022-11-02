@@ -40,8 +40,10 @@ For setting up your own RSS feeds to their corresponding webhooks, [we provide a
 ```
 
 ## TODO
-- Implement `old_embeds` to not repeat messages.
-- Slack interface
+- Format Discord message
+- Format Slack message
+- Get old embeds
+- Save old embeds
 
 ### Feedback
 Feel free to open an issue with any doubts or suggestions!
