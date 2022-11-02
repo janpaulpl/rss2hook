@@ -1,10 +1,23 @@
 {
-  "1036990850284142634": {
-    "https://discord.com/api/webhooks/1036990907687374911/oQfMr2EloMMBt6AZ2wTRu__MoeQW1BgXIbYEfsyNZj9i--a5tONPnzqVhzDq3Ay6hgQe": {
-      "RSS-url": "TEST"
-    },
-    "https://discord.com/api/webhooks/1036994009819787295/ovj23eXX4YaJmptZ8KFziWdi2-WRzrYz768P56p6Z7_2h4r1Lylf0_VIMLUwFkZJdPI_": {
-      "RSS-url": "TEST"
+  "send frequency": 30,
+  "servers": [
+    {
+      "server id": "serverId",
+      "name": "plain text server name",
+      "channels": [
+        {
+          "name": "Dev Hook",
+          "webhook url": "https://discord.com/api/webhooks/1036990907687374911/oQfMr2EloMMBt6AZ2wTRu__MoeQW1BgXIbYEfsyNZj9i--a5tONPnzqVhzDq3Ay6hgQe",
+          "feeds": [
+            {
+              "name": "Nature",
+              "url": "https://www.nature.com/nature.rss",
+              "avatar": "./data/img/rss.jpeg",
+              "old_embeds": "embeds/nature.json"
+            }
+          ]
+        }
+      ]
     }
-  }
+  ]
 }

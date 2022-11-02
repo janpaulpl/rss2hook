@@ -1,0 +1,67 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "servers": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "object",
+                    "properties": {
+                        "serverId": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "channels": {
+                            "type": "array",
+                            "items": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "webHookURL": {
+                                            "type": "string"
+                                        },
+                                        "feeds": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "URL": {
+                                                            "type": "string"
+                                                        },
+                                                        "REGEX": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "URL",
+                                                        "REGEX"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "webHookURL",
+                                        "feeds"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "required": [
+                        "serverId",
+                        "name",
+                        "channels"
+                    ]
+                }
+            ]
+        }
+    },
+    "required": [
+        "servers"
+    ]
+}
