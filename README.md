@@ -1,18 +1,43 @@
-# Discord RSS feed Webhook
-RSS feed webhook for Discord servers.
+# Discord RSS feed channel webhooks
 
-## Back-end configuration
+## Set up
+For your local instance, run the following script to add the necessary folders
 
-- JSON with all channels listed 
-- ...
+```sh
+$ chmod +x build.sh
+$ ./build.sh
+```
 
-## TODO
-We have to check if the content is the same before posting, if so do we 
-  - Retry to load and find if the content changes (What makes content change, how long do we wait?)
-  - Skip and don't send a message
-  - A combination of both?
+For setting up your own RSS feeds to their corresponding webhooks, [we provide a JSON schema](./data/servers.schema.json). Follow the schema and put your own JSON file in [the private folder](./data/private). Make sure to **never** share your webhook urls or data!
 
-### References
-[How to use RSS](https://cyber.harvard.edu/rss/rss.html)
-[Feedparser docs](https://github.com/kurtmckee/feedparser)
-[Discord webhook docs](https://github.com/10mohi6/discord-webhook-python)
+> Example server configuration file
+
+```json
+{
+  "send frequency": 30,
+  "servers": [
+    {
+      "server id": "serverId",
+      "name": "plain text server name",
+      "channels": [
+        {
+          "name": "channel name",
+          "type": "discord",
+          "webhook url": "WEBHOOK LINK HERE",
+          "feeds": [
+            {
+              "name": "Nature",
+              "url": "https://www.nature.com/nature.rss",
+              "avatar": "./data/private/img/rss.jpeg",
+              "old_embeds": "./data/private/old_embeds/nature.json"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Feedback
+Feel free to open an issue with any doubts or suggestions!

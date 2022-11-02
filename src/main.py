@@ -18,8 +18,8 @@ def main() -> None:
     '''
 
     # Read servers.json
-    f = open("../data/servers.json", 'r')
-    data = json.load("../data/servers.json")
+    f = open("./data/private/servers.json", 'r')
+    data = json.load(f)
     f.close()
 
     send_freq = data["send frequency"]
@@ -29,7 +29,7 @@ def main() -> None:
     while True:
         # For each server s, send to each channel
         for s in servers:
-            for c in s["channels"]:
+            for c in s:
                 # Get and post updates for every feed in channel, update last seen embeds
                 c.process()
         # Wait send_freq seconds, before sending again
