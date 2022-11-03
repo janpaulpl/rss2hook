@@ -47,6 +47,10 @@ For setting up your own RSS feeds to their corresponding webhooks, [we provide a
 - Limit on messages
 - Implement Slack interface
 - Regex/[Fuzzy](https://towardsdatascience.com/fuzzy-string-matching-in-python-68f240d910fe) searching implementation
+- Automatic comparison with `servers.schema.json`
+- Raspberry pi environment 
+  - Automatically `git pull` to update script
+  - Build environment from a single image (docker?)
 
 ### Feedback
 Feel free to open an issue with any doubts or suggestions!
