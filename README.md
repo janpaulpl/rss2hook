@@ -39,7 +39,15 @@ For setting up your own RSS feeds to their corresponding webhooks, [we provide a
 }
 ```
 
+<<<<<<< HEAD
 **Scuffed Warning:** We recommend for the `avatar` field to use an image-hosting site because Discord only allows for publicly hosted images for the webhook avatar. (something like imgur should work fine)
+=======
+## TODO
+- Format Discord message
+- Format Slack message
+- Get old embeds
+- Save old embeds
+>>>>>>> 8ca237a794f7386c48f66cced860204f893e9200
 
 ### Feedback
 Feel free to open an issue with any doubts or suggestions!
