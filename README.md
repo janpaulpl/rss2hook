@@ -41,6 +41,13 @@ For setting up your own RSS feeds to their corresponding webhooks, [we provide a
 
 **Scuffed Warning:** We recommend for the `avatar` field to use an image-hosting site because Discord only allows for publicly hosted images for the webhook avatar. (something like imgur should work fine)
 
+## TODO
+- Automate `old_items` file generation
+- Async request from websites
+- Limit on messages
+- Implement Slack interface
+- Regex searching implementation
+
 ### Feedback
 Feel free to open an issue with any doubts or suggestions!
  I will never be able to write git push`
