@@ -1,31 +1,40 @@
-from rss import Feed, Embed
+from rss import Feed
 import requests
-import json
+import time
+import markdownify as md
 
 
 class Post:
     '''Discord formatted post'''
 
-    def __init__(self, username: str, embeds: list[Embed], avatar_url="https://raw.githubusercontent.com/jpVinnie/discord-rss-hook/main/data/rss.jpeg"):
+    def __init__(self, username: str, items: list[str], avatar_url="https://raw.githubusercontent.com/jpVinnie/discord-rss-hook/main/data/rss.jpeg"):
         self.username = username
-        self.embeds = embeds
+        self.items = items
         self.avatar_url = avatar_url
 
     def post_discord(self, url: str) -> None:
         '''Post self to discord webhook at url.'''
-        for e in self.embeds:
-            pass
-        data = {"username": self.username,
-                "avatar_url": self.avatar_url,
-                "content": e.description}
-        result = requests.post(url, data)
-        result.raise_for_status()
+        count = 0
+        for item in self.items:
+            if count != 0:
+                time.sleep(3)
+            data = {"username": self.username,
+                    "avatar_url": self.avatar_url,
+                    "content": item}
+            result = requests.post(url, data)
+            result.raise_for_status()
+            count += 1
 
     def post_slack(self, url: str) -> None:
         '''Post self to slack webhook at url.'''
-        for e in self.embeds:
-            result = requests.post(url, e.slack_payload)
+        count = 0
+        for item in self.items:
+            data = dict()  # TODO TODO TODO TODO TODO TODO TODO
+            result = requests.post(url, data)
             result.raise_for_status()
+            if count != 0:
+                time.sleep(1)
+            count += 1
 
 
 class Channel:
@@ -43,18 +52,18 @@ class Channel:
     def process(self):
         '''Get and post updates for every feed in channel.'''
         for feed in self.feeds:
-            # try:
-            embeds = feed.updates()
-            # TODO TODO TODO TODO TODO Add avatar
-            post = Post(feed.name, embeds)
-            if self.type == "discord":
-                post.post_discord(self.hook_url)
-                print(f"posted \nchannel={self.name}\nfeed={feed.name}")
-            else:
-                post.post_slack(self.hook_url)
-                print(
-                    f"not posted \nchannel={self.name}\nfeed={feed.name}")
+            try:
+                items = feed.updates()
+                post = Post(feed.name, items, avatar_url=feed.avatar)
+                if self.type == "discord":
+                    post.post_discord(self.hook_url)
+                    print(f"posted \nchannel={self.name}\nfeed={feed.name}")
+                else:
+                    post.post_slack(self.hook_url)
+                    print(
+                        f"not posted \nchannel={self.name}\nfeed={feed.name}")
+                feed.save_old(items)
 
-            # except Exception as e:
-            #     print(
-            #         f"Exception processing\n    channel= {self.name}\n    feed= {feed.name}\n{e}")
+            except Exception as e:
+                print(
+                    f"Exception processing\n    channel= {self.name}\n    feed= {feed.name}\n{e}")

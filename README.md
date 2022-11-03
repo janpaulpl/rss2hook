@@ -28,8 +28,8 @@ For setting up your own RSS feeds to their corresponding webhooks, [we provide a
             {
               "name": "Nature",
               "url": "https://www.nature.com/nature.rss",
-              "avatar": "./data/private/img/rss.jpeg",
-              "old_embeds": "./data/private/old_embeds/nature.json"
+              "avatar": "online host: ./data/private/img/rss.jpeg",
+              "old items": "./data/private/old_items/nature.json"
             }
           ]
         }
@@ -38,6 +38,8 @@ For setting up your own RSS feeds to their corresponding webhooks, [we provide a
   ]
 }
 ```
+
+**Scuffed Warning:** We recommend for the `avatar` field to use an image-hosting site because Discord only allows for publicly hosted images for the webhook avatar. (something like imgur should work fine)
 
 ### Feedback
 Feel free to open an issue with any doubts or suggestions!

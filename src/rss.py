@@ -1,18 +1,6 @@
 import feedparser
 import ssl
-import pprint
-
-
-class Embed:
-    '''Discord formatted embed'''
-
-    def __init__(self, title: str, description: str):
-        self.title = title
-        self.description = description
-
-    def slack_payload(self) -> dict:
-        '''Format as Slack payload.'''
-        return set()
+import json
 
 
 class Feed:
@@ -20,28 +8,42 @@ class Feed:
 
     def __init__(self, feed: dict):
         '''Construct Feed from servers.json formatted feed.'''
-        old_embeds = set()  # TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
 
         self.url = feed["url"]
         self.name = feed["name"]
-        self.old_embeds = old_embeds
+        self.old_items_file = feed["old items"]
+        self.avatar = feed["avatar"]
         self.regex = feed.get("regex", "*")
 
-    def embeds(self) -> set[Embed]:
-        '''Set of Embeds at url'''
+    def items(self) -> list[str]:
+        '''Set of items at url'''
+        # Create SSl context
         if hasattr(ssl, '_create_unverified_context'):
             ssl._create_default_https_context = ssl._create_unverified_context
+
+        # Parse feed, raise error if parsing incomplete
         feed_text = feedparser.parse(self.url)
         if feed_text["bozo"] == 1:
             raise feed_text.bozo_exception
+
+        # Try to parse entries
         try:
-            embeds = {Embed(title=e.title, description=f"[{e.description}]({e.link})")
-                      for e in feed_text.entries}
+            embeds = {f"[{e.title}]({e.link})" for e in feed_text.entries}
         except AttributeError:
-            embeds = {Embed(title=e.title, description=e.description)
-                      for e in feed_text.entries}
+            embeds = {e.title for e in feed_text.entries}
+
         return embeds
 
-    def updates(self) -> set[Embed]:
+    def updates(self) -> list[str]:
         '''Set of Embeds currently in Feed not in old_embeds'''
-        return self.embeds().difference(self.old_embeds)
+        f = open(self.old_items_file, "r")
+        o = json.load(f)["old items"]
+        f.close()
+
+        return list(set(self.items()).difference(set(o)))
+
+    def save_old(self, old_items: list[str]) -> None:
+        '''Save list of items to self.old_items_file json.'''
+        f = open(self.old_items_file, "w")
+        json.dump({"old items": old_items}, f)
+        f.close()
